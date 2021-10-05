@@ -52,7 +52,7 @@ const TYPES = [
   'hotel',
 ];
 
-const CHECK = [
+const TIMES = [
   '12:00',
   '13:00',
   '14:00',
@@ -64,7 +64,7 @@ const FEATURES = [
   'parking',
   'washer',
   'elevator',
-  'conditioner'
+  'conditioner',
 ];
 
 const PHOTOS = [
@@ -96,32 +96,30 @@ const createAuthor = (xx) => ({
   avatar:`img/avatars/user${xx}.png`,
 });
 
-const createLocation = () => ({
-  lat: getPositiveFloatRange(35.65, 35.7, 5),
-  lng: getPositiveFloatRange(139.7, 139.8, 5),
-});
-
-const createOffer = (lat, lng) => ({
-  title: 'Сдаётся',
-  address: `${lat},${lng}`,// как связать с location стрелочные функции
-  price: getPositiveInt(0,1000), //любое
-  type: TYPES[getPositiveInt(0,4)],
-  rooms: getPositiveInt(0,10), //любое
-  guests: getPositiveInt(0,10), //любое
-  checkin: CHECK[getPositiveInt(0,2)],
-  checkout: CHECK[getPositiveInt(0,2)],
-  features: getArray(FEATURES, 0, 5),
-  description: 'Квартира',
-  photos: getArray(PHOTOS, 0, 2),
-});
-
 const createAd = (xx) => {
-  const XX=xx;
+  const RANDOM_LAT = getPositiveFloatRange(35.65, 35.7, 5);
+  const RANDOM_LNG = getPositiveFloatRange(139.7, 139.8, 5);
   return{
-    author: createAuthor(XX),
-    location: createLocation(), // ?
-    offer: createOffer(createLocation().lat,createLocation().lng), // разное местоположение
-  };};
+    author: createAuthor(xx),
+    offer: {
+      title: 'Сдаётся',
+      address: `${RANDOM_LAT},${RANDOM_LNG}`,
+      price: getPositiveInt(0,1000),
+      type: TYPES[getPositiveInt(0,4)],
+      rooms: getPositiveInt(0,10),
+      guests: getPositiveInt(0,10),
+      checkin: TIMES[getPositiveInt(0,2)],
+      checkout: TIMES[getPositiveInt(0,2)],
+      features: getArray(FEATURES, 0, 5),
+      description: 'Квартира',
+      photos: getArray(PHOTOS, 0, 2),
+    },
+    location: {
+      lat: RANDOM_LAT,
+      lng: RANDOM_LNG,
+    },
+  };
+};
 
 const createAds = () => {
   const ADS_ARRAY = [];
@@ -133,5 +131,6 @@ const createAds = () => {
 };
 
 const ADS = createAds();
+ADS;
 
 
