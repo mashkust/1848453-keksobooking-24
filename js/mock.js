@@ -1,4 +1,6 @@
 export const LENGHT_ADS_ARRAY = 10 ;
+export const USER_PICTURE_PATH = 'img/avatars/user';
+export const USER_PICTURE_EXT = '.png';
 
 export const TYPES = [
   'palace',
