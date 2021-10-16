@@ -30,10 +30,10 @@ const createAd = (i) => {
     offer: {
       title: 'Сдаётся',
       address: `${RANDOM_LAT},${RANDOM_LNG}`,
-      price: getPositiveInt(0,1000),
+      price: getPositiveInt(1,1000),
       type: TYPES[getPositiveInt(0,4)],
-      rooms: getPositiveInt(0,10),
-      guests: getPositiveInt(0,10),
+      rooms: getPositiveInt(1,10),
+      guests: getPositiveInt(1,10),
       checkin: TIMES[getPositiveInt(0,2)],
       checkout: TIMES[getPositiveInt(0,2)],
       features: getArray(FEATURES, 0, 5),
