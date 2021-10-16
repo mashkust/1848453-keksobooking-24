@@ -3,7 +3,6 @@ const mapTemplate = document.querySelector('#card').content;
 const getPhoto = (popupElement, photos) => {
   const popupPhotos = popupElement.querySelector('.popup__photos');
   if (photos.length === 0) {
-    //Скрываем если нет фотографий
     popupPhotos.style.display = 'none';
     return;
   }
@@ -58,7 +57,7 @@ export const createCard = (offerObject) => {
   userCard.querySelector('.popup__text--time').textContent = `Заезд после ${offerObject.offer.checkin}, выезд до ${  offerObject.offer.checkout}`;
   userCard.querySelector('.popup__features').src = makePopupFeatures(userCard, offerObject.offer.features);
   userCard.querySelector('.popup__description').textContent = offerObject.offer.description;
-  userCard.querySelector('.popup__photos img').src = getPhoto(userCard, offerObject.offer.photos);
+  userCard.querySelector('.popup__photos').src = getPhoto(userCard, offerObject.offer.photos);
   userCard.querySelector('.popup__avatar').src = offerObject.author.avatar;
   return userCard;
 };
