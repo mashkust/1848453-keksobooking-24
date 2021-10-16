@@ -1,4 +1,6 @@
-import {createAds} from './data';
+import {ADS} from'./data.js';
+import {createCard} from './marking.js';
 
-const ADS = createAds();
-ADS;
+const offerObject = ADS[2];
+const userCard = createCard(offerObject);
+document.querySelector('#map-canvas').appendChild(userCard) ;

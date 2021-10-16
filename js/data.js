@@ -1,5 +1,5 @@
-import {getPositiveInt, getPositiveFloatRange} from './util';
-import {LENGHT_ADS_ARRAY, TYPES, TIMES, FEATURES, PHOTOS} from './mock';
+import {getPositiveInt, getPositiveFloatRange} from './util.js';
+import {LENGHT_ADS_ARRAY, USER_PICTURE_EXT, USER_PICTURE_PATH, TYPES, TIMES, FEATURES, PHOTOS} from './mock.js';
 
 const getArray = (some, min, max) => {
   const MAX_LENGHT = some.length;
@@ -18,22 +18,22 @@ const getArray = (some, min, max) => {
   return ARRAY;
 };
 
-const createAuthor = (xx) => ({
-  avatar:`img/avatars/user${xx}.png`,
+const createAuthor = (i) => ({
+  avatar: USER_PICTURE_PATH + i + USER_PICTURE_EXT ,
 });
 
-const createAd = (xx) => {
+const createAd = (i) => {
   const RANDOM_LAT = getPositiveFloatRange(35.65, 35.7, 5);
   const RANDOM_LNG = getPositiveFloatRange(139.7, 139.8, 5);
   return{
-    author: createAuthor(xx),
+    author: createAuthor(i),
     offer: {
       title: 'Сдаётся',
       address: `${RANDOM_LAT},${RANDOM_LNG}`,
-      price: getPositiveInt(0,1000),
+      price: getPositiveInt(1,1000),
       type: TYPES[getPositiveInt(0,4)],
-      rooms: getPositiveInt(0,10),
-      guests: getPositiveInt(0,10),
+      rooms: getPositiveInt(1,10),
+      guests: getPositiveInt(1,10),
       checkin: TIMES[getPositiveInt(0,2)],
       checkout: TIMES[getPositiveInt(0,2)],
       features: getArray(FEATURES, 0, 5),
@@ -47,12 +47,14 @@ const createAd = (xx) => {
   };
 };
 
-export const createAds = () => {
+const createAds = () => {
   const ADS_ARRAY = [];
   for(let index = 0; index < LENGHT_ADS_ARRAY-1; index++) {
     ADS_ARRAY[index] = createAd(`0${index+1}`);
   }
-  ADS_ARRAY[LENGHT_ADS_ARRAY-1] = createAd(LENGHT_ADS_ARRAY);
+  ADS_ARRAY[LENGHT_ADS_ARRAY-1] = createAd(String(LENGHT_ADS_ARRAY));
   return ADS_ARRAY;
 };
 
+export const ADS = createAds();
+ADS;
