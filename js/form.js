@@ -1,4 +1,4 @@
-const makeInactiveNotice = () => {
+const getInactiveNotice = () => {
   const formNotice = document.querySelector('.ad-form');
   const inactiveNotice = formNotice.classList.add('ad-form--disabled');
   const fieldsetNotice = formNotice.getElementsByTagName('fieldset');
@@ -8,7 +8,7 @@ const makeInactiveNotice = () => {
   return inactiveNotice;
 };
 
-const makeInactiveMap = () => {
+const getInactiveMap = () => {
   const formMap = document.querySelector('.map__filters');
   const inactiveMap = formMap.classList.add('map__filters--disabled');
   const fieldsetMap = formMap.getElementsByTagName('fieldset');
@@ -18,7 +18,7 @@ const makeInactiveMap = () => {
   return inactiveMap;
 };
 
-const makeActiveNotice = () => {
+const getActiveNotice = () => {
   if (document.querySelector('.ad-form').classList.contains('ad-form--disabled')) {
     const formNotice = document.querySelector('.ad-form');
     const activeNotice = formNotice.classList.remove('ad-form--disabled');
@@ -30,7 +30,7 @@ const makeActiveNotice = () => {
   }
 };
 
-const makeActiveMap = () => {
+const getActiveMap = () => {
   if (document.querySelector('.ad-form').classList.contains('ad-form--disabled')){
     const formMap = document.querySelector('.map__filters');
     const activeMap = formMap.classList.remove('map__filters--disabled');
@@ -42,7 +42,7 @@ const makeActiveMap = () => {
   }
 };
 
-makeInactiveNotice();
-makeInactiveMap();
-makeActiveNotice();
-//makeActiveMap();
+getInactiveNotice();
+getInactiveMap();
+getActiveNotice();
+getActiveMap();
