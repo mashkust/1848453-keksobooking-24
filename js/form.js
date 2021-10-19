@@ -3,7 +3,7 @@ const getInactiveNotice = () => {
   const inactiveNotice = formNotice.classList.add('ad-form--disabled');
   const fieldsetNotice = formNotice.getElementsByTagName('fieldset');
   for( let i = 0; i < fieldsetNotice.length; i++ ){
-    fieldsetNotice[i].setAttribute('disabled','');
+    fieldsetNotice[i].disabled=true;
   }
   return inactiveNotice;
 };
@@ -13,7 +13,7 @@ const getInactiveMap = () => {
   const inactiveMap = formMap.classList.add('map__filters--disabled');
   const fieldsetMap = formMap.getElementsByTagName('fieldset');
   for( let i = 0; i < fieldsetMap.length; i++ ){
-    fieldsetMap[i].setAttribute('disabled','');
+    fieldsetMap[i].disabled=true;
   }
   return inactiveMap;
 };
