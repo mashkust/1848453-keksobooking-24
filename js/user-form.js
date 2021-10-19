@@ -1,4 +1,4 @@
-import {ROOMS_NUMBER, TYPES, TIMES} from './mock.js';
+import {ROOMS_NUMBER, TYPES} from './mock.js';
 
 const capacitySelect =document.querySelector('#capacity');
 const capacityOption = capacitySelect.querySelectorAll('option');
