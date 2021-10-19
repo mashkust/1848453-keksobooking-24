@@ -30,3 +30,10 @@ export const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
+
+export const ROOMS_NUMBER = {
+  ONE_ROOM: '1',
+  TWO_ROOMS: '2',
+  THREE_ROOMS: '3',
+  HUNDRED_ROOMS: '100',
+};

@@ -31,7 +31,7 @@ const getActiveNotice = () => {
 };
 
 const getActiveMap = () => {
-  if (document.querySelector('.ad-form').classList.contains('ad-form--disabled')){
+  if (document.querySelector('.map__filters--disabled').classList.contains('map__filters--disabled')){
     const formMap = document.querySelector('.map__filters');
     const activeMap = formMap.classList.remove('map__filters--disabled');
     const fieldsetMap = formMap.getElementsByTagName('fieldset');
