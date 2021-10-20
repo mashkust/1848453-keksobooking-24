@@ -1,4 +1,4 @@
-import {ROOMS_NUMBER, TYPES} from './mock.js';
+import {ROOMS_NUMBER, TYPES, PRICE} from './mock.js';
 
 const capacitySelect =document.querySelector('#capacity');
 const capacityOption = capacitySelect.querySelectorAll('option');
@@ -47,19 +47,19 @@ roomNumberSelect.addEventListener('change', () => {
 
 typeSelect.addEventListener('change', () => {
   if (typeSelect.value === TYPES[3]) {
-    putPrice(0);
+    putPrice(PRICE.BUNGALOW);
   }
   else if (typeSelect.value === TYPES[1]) {
-    putPrice(1000);
+    putPrice(PRICE.FLAT);
   }
   else if (typeSelect.value === TYPES[4]) {
-    putPrice(3000);
+    putPrice(PRICE.HOTEL);
   }
   else if (typeSelect.value === TYPES[2]) {
-    putPrice(5000);
+    putPrice(PRICE.HOUSE);
   }
   else {
-    putPrice(10000);
+    putPrice(PRICE.PALACE);
   }
 });
 

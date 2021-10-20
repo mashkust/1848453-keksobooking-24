@@ -37,3 +37,11 @@ export const ROOMS_NUMBER = {
   THREE_ROOMS: '3',
   HUNDRED_ROOMS: '100',
 };
+
+export const PRICE = {
+  BUNGALOW: '0',
+  FLAT: '1000',
+  HOTEL: '3000',
+  HOUSE: '5000',
+  PALACE: '5000',
+};
