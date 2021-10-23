@@ -43,5 +43,5 @@ export const PRICE = {
   FLAT: '1000',
   HOTEL: '3000',
   HOUSE: '5000',
-  PALACE: '5000',
+  PALACE: '10000',
 };
