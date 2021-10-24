@@ -1,4 +1,4 @@
-import {ROOMS_NUMBER, TYPES, PRICE} from './mock.js';
+import {RoomsNumber, types, priceTypeOfHousing} from './mock.js';
 
 const capacitySelect =document.querySelector('#capacity');
 const capacityOption = capacitySelect.querySelectorAll('option');
@@ -26,16 +26,16 @@ const putPrice = (minPrice) => {
 };
 
 roomNumberSelect.addEventListener('change', () => {
-  if (roomNumberSelect.value === ROOMS_NUMBER.HUNDRED_ROOMS) {
+  if (roomNumberSelect.value === RoomsNumber.HUNDRED_ROOMS) {
     capacityOption[3].disabled = false;
     getDisabled(0, 2, true);
     capacityOption[3].selected=true;
   }
-  else if (roomNumberSelect.value === ROOMS_NUMBER.ONE_ROOM) {
+  else if (roomNumberSelect.value === RoomsNumber.ONE_ROOM) {
     getDisabled(0, 3, true);
     capacityOption[2].disabled = false;
   }
-  else if (roomNumberSelect.value === ROOMS_NUMBER.TWO_ROOMS) {
+  else if (roomNumberSelect.value === RoomsNumber.TWO_ROOMS) {
     getDisabled(0, 3, true);
     getDisabled(1, 2, false);
   }
@@ -46,20 +46,20 @@ roomNumberSelect.addEventListener('change', () => {
 });
 
 typeSelect.addEventListener('change', () => {
-  if (typeSelect.value === TYPES[3]) {
-    putPrice(PRICE.BUNGALOW);
+  if (typeSelect.value === types[3]) {
+    putPrice(priceTypeOfHousing.bungalow);
   }
-  else if (typeSelect.value === TYPES[1]) {
-    putPrice(PRICE.FLAT);
+  else if (typeSelect.value === types[1]) {
+    putPrice(priceTypeOfHousing.flat);
   }
-  else if (typeSelect.value === TYPES[4]) {
-    putPrice(PRICE.HOTEL);
+  else if (typeSelect.value === types[4]) {
+    putPrice(priceTypeOfHousing.hotel);
   }
-  else if (typeSelect.value === TYPES[2]) {
-    putPrice(PRICE.HOUSE);
+  else if (typeSelect.value === types[2]) {
+    putPrice(priceTypeOfHousing.house);
   }
   else {
-    putPrice(PRICE.PALACE);
+    putPrice(priceTypeOfHousing.palace);
   }
 });
 

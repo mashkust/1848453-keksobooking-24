@@ -1,6 +1,11 @@
-import {ADS} from'./data.js';
+import {ads} from'./data.js';
 import {createCard} from'./marking.js';
-const mapFiltersType = document.querySelector('#housing-type');
+const mapFilters = document.querySelector('.map__filters');
+const mapFiltersType = mapFilters.querySelector('#housing-type');
+// const mapFiltersPrice = mapFilters.querySelector('#housing-price');
+//const mapFiltersRooms = mapFilters.querySelector('#housing-rooms');
+// const mapFiltersGuests = mapFilters.querySelector('#housing-guests');
+// const mapFiltersFeatures = mapFilters.querySelector('#housing-features');
 
 /*const getInactive = (someClass, disabledClass) => {
   const formSome = document.querySelector(someClass);
@@ -102,27 +107,34 @@ const createMarker = (point) => {
     .bindPopup(createCard(point));
 };
 
-ADS.forEach((point) => {
+ads.forEach((point) => {
   createMarker(point);
 });
 
 const createAdsFilters = () => {
-  const val = mapFiltersType.value;
+  const VAL_TYPE = mapFiltersType.value;
+  // const VAL_PRICE = mapFiltersPrice.value;
+  //const VAL_ROOMS = mapFiltersRooms.value;
+  // const VAL_GUESTS = mapFiltersGuests.value;
+  // const VAL_FEATURES = mapFiltersFeatures.value;
   const FILTERS_ARRAY = [];
   let newi=0;
-  for(let i = 0; i < ADS.length ; i++) {
-    if(ADS[i].offer.type === val) {
-      FILTERS_ARRAY[newi] = ADS[i];
+  for(let i = 0; i < ads.length ; i++) {
+    if(ads[i].offer.type === VAL_TYPE ) {
+      FILTERS_ARRAY[newi] = ads[i];
       newi++;
     }
   }
   return FILTERS_ARRAY;
 };
 
-mapFiltersType.addEventListener('click', () => {
+
+mapFilters.addEventListener('click', () => {
   markerGroup.clearLayers();
   const FILTERS_ARRAY = createAdsFilters();
   FILTERS_ARRAY.forEach((point) => {
     createMarker(point);
   });
 });
+
+
