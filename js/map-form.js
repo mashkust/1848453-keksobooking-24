@@ -1,5 +1,6 @@
 import {ADS} from'./data.js';
 import {createCard} from'./marking.js';
+const mapFiltersType = document.querySelector('#housing-type');
 
 /*const getInactive = (someClass, disabledClass) => {
   const formSome = document.querySelector(someClass);
@@ -22,6 +23,7 @@ const getActive = (someClass, disabledClass) => {
     return activeSome;
   }
 };
+
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -104,9 +106,23 @@ ADS.forEach((point) => {
   createMarker(point);
 });
 
-// mapFilters.querySelector('#housing-type').value.addEventListener('click', () => {
-//   markerGroup.clearLayers();
-//   ADS.forEach((point) => {
-//     createMarker(point);
-//   });
-// });
+const createAdsFilters = () => {
+  const val = mapFiltersType.value;
+  const FILTERS_ARRAY = [];
+  let newi=0;
+  for(let i = 0; i < ADS.length ; i++) {
+    if(ADS[i].offer.type === val) {
+      FILTERS_ARRAY[newi] = ADS[i];
+      newi++;
+    }
+  }
+  return FILTERS_ARRAY;
+};
+
+mapFiltersType.addEventListener('click', () => {
+  markerGroup.clearLayers();
+  const FILTERS_ARRAY = createAdsFilters();
+  FILTERS_ARRAY.forEach((point) => {
+    createMarker(point);
+  });
+});
