@@ -74,8 +74,7 @@ mainPinMarker.on('moveend', (evt) => {
 //   .then((posts) => console.log(posts))
 //   .catch((error) => console.log(error));
 
-// const offerObject = ADS[2];
-// const userCard = createCard(offerObject);
+const markerGroup = L.layerGroup().addTo(map);
 
 const createMarker = (point) => {
   const {lat, lng} = point;
@@ -97,10 +96,17 @@ const createMarker = (point) => {
   );
 
   marker
-    .addTo(map)
+    .addTo(markerGroup)
     .bindPopup(createCard(point));
 };
 
 ADS.forEach((point) => {
   createMarker(point);
 });
+
+// mapFilters.querySelector('#housing-type').value.addEventListener('click', () => {
+//   markerGroup.clearLayers();
+//   ADS.forEach((point) => {
+//     createMarker(point);
+//   });
+// });
