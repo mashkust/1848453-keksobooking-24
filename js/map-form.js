@@ -92,13 +92,14 @@ const createMarker = (point) => {
   );
 
   marker
-    .addTo(markerGroup);
+    .addTo(markerGroup)
     .bindPopup(createCard(point));
 };
 
 getData((cards) => {
   cards.forEach((point) => {
-  createMarker(point);
+    createMarker(point);
+  });
 });
 
 // const createAdsFilters = () => {
@@ -124,5 +125,5 @@ getData((cards) => {
 //   const FILTERS_ARRAY = createAdsFilters();
 //   FILTERS_ARRAY.forEach((point) => {
 //     createMarker(point);
-//   });
-// })
+//   }
+// });

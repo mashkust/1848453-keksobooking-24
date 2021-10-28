@@ -40,8 +40,10 @@ const createAd = (i) => {
       description: 'Квартира',
       photos: getArray(photos, 0, 2),
     },
-    lat: RANDOM_LAT,
-    lng: RANDOM_LNG,
+    location: {
+      lat: RANDOM_LAT,
+      lng: RANDOM_LNG,
+    },
   };
 };
 

@@ -50,15 +50,15 @@ const makePopupFeatures = (popupElement, features) => {
 
 export const createCard = (offerObject) => {
   const userCard  = mapTemplate.querySelector('.popup').cloneNode(true);
-  const makeNone = (userClass,property) => {
-    if (property.length === 0) {
-      userCard.querySelector(userClass).style.display = 'none';
-    }
-  };
-  makeNone('.popup__title', offerObject.offer.title);
-  makeNone('.popup__text--price', offerObject.offer.price);
-  makeNone('.popup__avatar', offerObject.author.avatar);
-  makeNone('.popup__description', offerObject.offer.description);
+  // const makeNone = (userClass,property) => {
+  //   if (property.length === 0) {
+  //     userCard.querySelector(userClass).style.display = 'none';
+  //   }
+  // };
+  // makeNone('.popup__title', offerObject.offer.title);
+  // makeNone('.popup__text--price', offerObject.offer.price);
+  // makeNone('.popup__avatar', offerObject.author.avatar);
+  // makeNone('.popup__description', offerObject.offer.description);
   userCard.querySelector('.popup__title').textContent = offerObject.offer.title;
   userCard.querySelector('.popup__text--address').textContent = offerObject.offer.address;
   userCard.querySelector('.popup__text--price').textContent = `${offerObject.offer.price  } р/ночь`;
