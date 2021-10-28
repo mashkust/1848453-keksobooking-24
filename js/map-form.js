@@ -72,8 +72,8 @@ mainPinMarker.on('moveend', (evt) => {
 
 const markerGroup = L.layerGroup().addTo(map);
 
-const createMarker = (point) => {
-  const {lat, lng} = point;
+const createMarker = (card) => {
+  const {lat, lng} = card.location;
 
   const icon = L.icon({
     iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
@@ -93,12 +93,12 @@ const createMarker = (point) => {
 
   marker
     .addTo(markerGroup)
-    .bindPopup(createCard(point));
+    .bindPopup(createCard(card));
 };
 
 getData((cards) => {
-  cards.forEach((point) => {
-    createMarker(point);
+  cards.forEach((card) => {
+    createMarker(card);
   });
 });
 
