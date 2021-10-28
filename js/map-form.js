@@ -1,9 +1,7 @@
-import {ads} from'./data.js';
-import {createCard} from'./marking.js';
-const mapFilters = document.querySelector('.map__filters');
-const mapFiltersType = mapFilters.querySelector('#housing-type');
+// const mapFilters = document.querySelector('.map__filters');
+// const mapFiltersType = mapFilters.querySelector('#housing-type');
 // const mapFiltersPrice = mapFilters.querySelector('#housing-price');
-//const mapFiltersRooms = mapFilters.querySelector('#housing-rooms');
+// const mapFiltersRooms = mapFilters.querySelector('#housing-rooms');
 // const mapFiltersGuests = mapFilters.querySelector('#housing-guests');
 // const mapFiltersFeatures = mapFilters.querySelector('#housing-features');
 
@@ -69,18 +67,6 @@ mainPinMarker.on('moveend', (evt) => {
   document.querySelector('#address').value = `${evt.target.getLatLng().lat.toFixed(5)},${evt.target.getLatLng().lng.toFixed(5)}`;
 });
 
-// fetch('https://24.javascript.pages.academy/keksobooking/data')
-//   .then((response) => {
-//     if (response.ok) {
-//       return response;
-//     }
-
-//     throw new Error(`${response.status} — ${response.statusText}`);
-//   })
-//   .then((response) => response.json())
-//   .then((posts) => console.log(posts))
-//   .catch((error) => console.log(error));
-
 const markerGroup = L.layerGroup().addTo(map);
 
 const createMarker = (point) => {
@@ -103,38 +89,40 @@ const createMarker = (point) => {
   );
 
   marker
-    .addTo(markerGroup)
-    .bindPopup(createCard(point));
+    .addTo(markerGroup);
 };
 
-ads.forEach((point) => {
+getData((cards) => {
+  createCard(cards.slice(0, CARDS_COUNT));
+});
+cards.forEach((point) => {
   createMarker(point);
 });
 
-const createAdsFilters = () => {
-  const VAL_TYPE = mapFiltersType.value;
-  // const VAL_PRICE = mapFiltersPrice.value;
-  //const VAL_ROOMS = mapFiltersRooms.value;
-  // const VAL_GUESTS = mapFiltersGuests.value;
-  // const VAL_FEATURES = mapFiltersFeatures.value;
-  const FILTERS_ARRAY = [];
-  let newi=0;
-  for(let i = 0; i < ads.length ; i++) {
-    if(ads[i].offer.type === VAL_TYPE ) {
-      FILTERS_ARRAY[newi] = ads[i];
-      newi++;
-    }
-  }
-  return FILTERS_ARRAY;
-};
+// const createAdsFilters = () => {
+//   const VAL_TYPE = mapFiltersType.value;
+//   // const VAL_PRICE = mapFiltersPrice.value;
+//   // const VAL_ROOMS = mapFiltersRooms.value;
+//   // const VAL_GUESTS = mapFiltersGuests.value;
+//   // const VAL_FEATURES = mapFiltersFeatures.value;
+//   const FILTERS_ARRAY = [];
+//   let newi=0;
+//   for(let i = 0; i < ads.length ; i++) {
+//     if(ads[i].offer.type === VAL_TYPE ) {
+//       FILTERS_ARRAY[newi] = ads[i];
+//       newi++;
+//     }
+//   }
+//   return FILTERS_ARRAY;
+// };
 
 
-mapFilters.addEventListener('click', () => {
-  markerGroup.clearLayers();
-  const FILTERS_ARRAY = createAdsFilters();
-  FILTERS_ARRAY.forEach((point) => {
-    createMarker(point);
-  });
-});
+// mapFilters.addEventListener('click', () => {
+//   markerGroup.clearLayers();
+//   const FILTERS_ARRAY = createAdsFilters();
+//   FILTERS_ARRAY.forEach((point) => {
+//     createMarker(point);
+//   });
+// });
 
 

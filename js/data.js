@@ -54,5 +54,5 @@ const createAds = () => {
   return ADS_ARRAY;
 };
 
-export const ads = createAds();
+const ads = createAds();
 ads;
