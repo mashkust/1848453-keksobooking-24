@@ -1,3 +1,6 @@
+import {createCard} from'./marking.js';
+import {getData} from './api.js';
+
 // const mapFilters = document.querySelector('.map__filters');
 // const mapFiltersType = mapFilters.querySelector('#housing-type');
 // const mapFiltersPrice = mapFilters.querySelector('#housing-price');
@@ -90,12 +93,11 @@ const createMarker = (point) => {
 
   marker
     .addTo(markerGroup);
+    .bindPopup(createCard(point));
 };
 
 getData((cards) => {
-  createCard(cards.slice(0, CARDS_COUNT));
-});
-cards.forEach((point) => {
+  cards.forEach((point) => {
   createMarker(point);
 });
 
@@ -123,6 +125,4 @@ cards.forEach((point) => {
 //   FILTERS_ARRAY.forEach((point) => {
 //     createMarker(point);
 //   });
-// });
-
-
+// })
