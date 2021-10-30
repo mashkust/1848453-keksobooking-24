@@ -97,7 +97,7 @@ const createMarker = (card) => {
 };
 
 getData((cards) => {
-  cards.forEach((card) => {
+  cards.slice(0, 10).forEach((card) => {
     createMarker(card);
   });
 });

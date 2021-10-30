@@ -1,5 +1,3 @@
-
-
 const getData = async (onSuccess) => {
   fetch('https://24.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
@@ -18,6 +16,7 @@ const sendData = (onSuccess, onFail, body) => {
   )
     .then((response) => {
       if (response.ok) {
+        document.querySelector('.ad-form__reset').click();
         onSuccess();
       } else {
         onFail('Не удалось отправить форму. Попробуйте ещё раз');

@@ -1,9 +1,10 @@
 import {RoomsNumber, types, priceTypeOfHousing} from './mock.js';
-// import { showAlert } from './message.js';
-// import {sendData} from './api.js';
+import {showAlert} from './message.js';
+import {sendData} from './api.js';
 
-// const cardForm = document.querySelector('.ad-form ');
-// const userModalElement = document.querySelector('.success');
+const cardForm = document.querySelector('.ad-form ');
+const success = document.querySelector('#success').content;
+const error = document.querySelector('#error').content;
 
 const capacitySelect =document.querySelector('#capacity');
 const capacityOption = capacitySelect.querySelectorAll('option');
@@ -76,21 +77,20 @@ timeoutSelect.addEventListener('change', () => {
   timeinSelect.value = timeoutSelect.value;
 });
 
-// const setUserFormSubmit = (onSuccess) => {
-//   cardForm.addEventListener('submit', (evt) => {
-//     evt.preventDefault();
-//     sendData(
-//       () => showAlert('удалось отправить форму. Попробуйте ещё раз'),
-//       () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
-//       new FormData(evt.target),
-//     );
-//   });
-// };
-
+const setUserFormSubmit = () => {
+  cardForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    sendData(
+      () => showAlert(success),
+      () => showAlert(error),
+      new FormData(evt.target),
+    );
+  });
+};
 
 // function openUserModal() {
 //   userModalElement.classList.remove('hidden');
 // }
 
-// setUserFormSubmit (openUserModal);
+setUserFormSubmit ();
 
