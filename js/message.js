@@ -1,6 +1,6 @@
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const showAlert = (message) => {
+export const showAlert = (message) => {
   const alertContainer = document.createElement('section');
   const messageServer  = message.cloneNode(true);
   document.body.appendChild(alertContainer).appendChild(messageServer);
@@ -17,4 +17,4 @@ const showAlert = (message) => {
     alertContainer.style.display = 'none';
   });
 };
-export { showAlert, isEscapeKey};
+
