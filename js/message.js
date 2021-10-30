@@ -16,8 +16,5 @@ const showAlert = (message) => {
   document.addEventListener('click', () => {
     alertContainer.style.display = 'none';
   });
-  document.querySelector('.error__button').addEventListener('click', () => {
-    alertContainer.style.display = 'none';
-  });
 };
 export { showAlert, isEscapeKey};
