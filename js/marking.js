@@ -2,7 +2,7 @@ const mapTemplate = document.querySelector('#card').content;
 
 const getPhoto = (popupElement, photos) => {
   const popupPhotos = popupElement.querySelector('.popup__photos');
-  if (photos.length === 0) {
+  if (typeof photos === 'undefined' || photos.length === 0) {
     popupPhotos.style.display = 'none';
     return;
   }
@@ -33,7 +33,7 @@ const translatePopupType = (type) => {
 
 const makePopupFeatures = (popupElement, features) => {
   const popupFeatures = popupElement.querySelector('.popup__features');
-  if (features.length === 0) {
+  if (typeof features === 'undefined' || features.length === 0) {
     popupFeatures.style.display = 'none';
     return;
   }
@@ -51,7 +51,7 @@ const makePopupFeatures = (popupElement, features) => {
 export const createCard = (offerObject) => {
   const userCard  = mapTemplate.querySelector('.popup').cloneNode(true);
   const makeNone = (userClass,property) => {
-    if (property.length === 0) {
+    if ( typeof  property === 'undefined' || property.length === 0) {
       userCard.querySelector(userClass).style.display = 'none';
     }
   };

@@ -2,7 +2,7 @@ export const LENGHT_ADS_ARRAY = 10 ;
 export const USER_PICTURE_PATH = 'img/avatars/user';
 export const USER_PICTURE_EXT = '.png';
 
-export const TYPES = [
+export const types = [
   'palace',
   'flat',
   'house',
@@ -10,13 +10,13 @@ export const TYPES = [
   'hotel',
 ];
 
-export const TIMES = [
+export const times = [
   '12:00',
   '13:00',
   '14:00',
 ];
 
-export const FEATURES = [
+export const features = [
   'wifi',
   'dishwasher',
   'parking',
@@ -25,23 +25,23 @@ export const FEATURES = [
   'conditioner',
 ];
 
-export const PHOTOS = [
+export const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-export const ROOMS_NUMBER = {
+export const RoomsNumber = {
   ONE_ROOM: '1',
   TWO_ROOMS: '2',
   THREE_ROOMS: '3',
   HUNDRED_ROOMS: '100',
 };
 
-export const PRICE = {
-  BUNGALOW: '0',
-  FLAT: '1000',
-  HOTEL: '3000',
-  HOUSE: '5000',
-  PALACE: '10000',
+export const priceTypeOfHousing = {
+  bungalow: '0',
+  flat: '1000',
+  hotel: '3000',
+  house: '5000',
+  palace: '10000',
 };

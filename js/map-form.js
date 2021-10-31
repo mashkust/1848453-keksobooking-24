@@ -1,5 +1,12 @@
-import {ADS} from'./data.js';
 import {createCard} from'./marking.js';
+import {getData} from './api.js';
+
+// const mapFilters = document.querySelector('.map__filters');
+// const mapFiltersType = mapFilters.querySelector('#housing-type');
+// const mapFiltersPrice = mapFilters.querySelector('#housing-price');
+// const mapFiltersRooms = mapFilters.querySelector('#housing-rooms');
+// const mapFiltersGuests = mapFilters.querySelector('#housing-guests');
+// const mapFiltersFeatures = mapFilters.querySelector('#housing-features');
 
 /*const getInactive = (someClass, disabledClass) => {
   const formSome = document.querySelector(someClass);
@@ -22,6 +29,7 @@ const getActive = (someClass, disabledClass) => {
     return activeSome;
   }
 };
+
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -62,23 +70,10 @@ mainPinMarker.on('moveend', (evt) => {
   document.querySelector('#address').value = `${evt.target.getLatLng().lat.toFixed(5)},${evt.target.getLatLng().lng.toFixed(5)}`;
 });
 
-// fetch('https://24.javascript.pages.academy/keksobooking/data')
-//   .then((response) => {
-//     if (response.ok) {
-//       return response;
-//     }
+const markerGroup = L.layerGroup().addTo(map);
 
-//     throw new Error(`${response.status} — ${response.statusText}`);
-//   })
-//   .then((response) => response.json())
-//   .then((posts) => console.log(posts))
-//   .catch((error) => console.log(error));
-
-// const offerObject = ADS[2];
-// const userCard = createCard(offerObject);
-
-const createMarker = (point) => {
-  const {lat, lng} = point;
+const createMarker = (card) => {
+  const {lat, lng} = card.location;
 
   const icon = L.icon({
     iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
@@ -97,10 +92,38 @@ const createMarker = (point) => {
   );
 
   marker
-    .addTo(map)
-    .bindPopup(createCard(point));
+    .addTo(markerGroup)
+    .bindPopup(createCard(card));
 };
 
-ADS.forEach((point) => {
-  createMarker(point);
+getData((cards) => {
+  cards.slice(0, 10).forEach((card) => {
+    createMarker(card);
+  });
 });
+
+// const createAdsFilters = () => {
+//   const VAL_TYPE = mapFiltersType.value;
+//   // const VAL_PRICE = mapFiltersPrice.value;
+//   // const VAL_ROOMS = mapFiltersRooms.value;
+//   // const VAL_GUESTS = mapFiltersGuests.value;
+//   // const VAL_FEATURES = mapFiltersFeatures.value;
+//   const FILTERS_ARRAY = [];
+//   let newi=0;
+//   for(let i = 0; i < ads.length ; i++) {
+//     if(ads[i].offer.type === VAL_TYPE ) {
+//       FILTERS_ARRAY[newi] = ads[i];
+//       newi++;
+//     }
+//   }
+//   return FILTERS_ARRAY;
+// };
+
+
+// mapFilters.addEventListener('click', () => {
+//   markerGroup.clearLayers();
+//   const FILTERS_ARRAY = createAdsFilters();
+//   FILTERS_ARRAY.forEach((point) => {
+//     createMarker(point);
+//   }
+// });
