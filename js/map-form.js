@@ -5,7 +5,7 @@ const mapFilters = document.querySelector('.map__filters');
 const mapFiltersType = mapFilters.querySelector('#housing-type');
 // const mapFiltersTypeInput = mapFiltersType.createElement('div');
 // const mapFiltersPrice = mapFilters.querySelector('#housing-price');
-// const mapFiltersRooms = mapFilters.querySelector('#housing-rooms');
+const mapFiltersRooms = mapFilters.querySelector('#housing-rooms');
 // const mapFiltersGuests = mapFilters.querySelector('#housing-guests');
 // const mapFiltersFeatures = mapFilters.querySelector('#housing-features');
 
@@ -103,12 +103,12 @@ getData((cards) => {
   });
 });
 
-const createAdsFilters = () => {
+const createTypeFilters = (cards) => {
   const VAL_TYPE = mapFiltersType.value;
   // const VAL_PRICE = mapFiltersPrice.value;
-  // const VAL_ROOMS = mapFiltersRooms.value;
   // const VAL_GUESTS = mapFiltersGuests.value;
   // const VAL_FEATURES = mapFiltersFeatures.value;
+  // let FILTERS_ARRAY = cards.slice()
   const FILTERS_ARRAY = [];
   let newi=0;
   for(let i = 0; i < cards.length ; i++) {
@@ -116,17 +116,72 @@ const createAdsFilters = () => {
       FILTERS_ARRAY[newi] = cards[i];
       newi++;
     }
+    if(VAL_TYPE==='any') {
+      FILTERS_ARRAY[newi] = cards[i];
+      newi++;
+    }
   }
   return FILTERS_ARRAY;
 };
 
+const createRoomsFilters = (cards) => {
+  // const VAL_PRICE = mapFiltersPrice.value;
+  const VAL_ROOMS = mapFiltersRooms.value;
+  // const VAL_GUESTS = mapFiltersGuests.value;
+  // const VAL_FEATURES = mapFiltersFeatures.value;
+  // let FILTERS_ARRAY = cards.slice()
+  const FILTERS_ARRAY = [];
+  let newi=0;
+  for(let i = 0; i < cards.length ; i++) {
+    if(cards[i].offer.rooms === Number(VAL_ROOMS)) {
+      FILTERS_ARRAY[newi] = cards[i];
+      newi++;
+    }
+    if(VAL_ROOMS==='any') {
+      FILTERS_ARRAY[newi] = cards[i];
+      newi++;
+    }
+  }
+  return FILTERS_ARRAY;
+};
 
-mapFiltersType.addEventListener('click', (evt) => {
-  // mapFiltersTypeInput.value = mapFiltersType.value;
+mapFiltersRooms.addEventListener('click', () => {
   markerGroup.clearLayers();
-  const FILTERS_ARRAY = createAdsFilters();
-  FILTERS_ARRAY.forEach((card) => {
-    createMarker(card);
+  getData((cards) => {
+    const FILTERS_ARRAY =createRoomsFilters(cards);
+    FILTERS_ARRAY.slice(0, 10).forEach((card) => {
+      createMarker(card);
+    });
   });
 });
 
+mapFiltersType.addEventListener('click', () => {
+  markerGroup.clearLayers();
+  getData((cards) => {
+    const FILTERS_ARRAY =createTypeFilters(cards);
+    FILTERS_ARRAY.slice(0, 10).forEach((card) => {
+      createMarker(card);
+    });
+  });
+});
+
+// mapFilters.addEventListener('click', () => {
+//   markerGroup.clearLayers();
+//   getData((cards) => {
+//     const FILTERS_ARRAY =createRoomsFilters(cards);
+//     const FILTERS_ARRAY1 =createTypeFilters(cards);
+//     const FILTERS_ARRAY3 = [];
+//     let newi=0;
+//     for (let i=0; i < FILTERS_ARRAY ; i++) {
+//       for (let j=0; i < FILTERS_ARRAY1 ; j++) {
+//         if (FILTERS_ARRAY[i] === FILTERS_ARRAY1[j]) {
+//           FILTERS_ARRAY3[newi] = FILTERS_ARRAY[i];
+//           newi++;
+//         }
+//       }
+//     }
+//     FILTERS_ARRAY3.slice(0, 10).forEach((card) => {
+//       createMarker(card);
+//     });
+//   });
+// });
