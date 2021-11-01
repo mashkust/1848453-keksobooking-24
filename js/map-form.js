@@ -6,6 +6,40 @@ const mapFiltersType = mapFilters.querySelector('#housing-type');
 const mapFiltersPrice = mapFilters.querySelector('#housing-price');
 const mapFiltersRooms = mapFilters.querySelector('#housing-rooms');
 const mapFiltersGuests = mapFilters.querySelector('#housing-guests');
+
+let preparedCards = null;
+
+const chosenFilters = {
+  type: null,
+  price: null,
+  rooms: null,
+  guests: null,
+};
+
+const setChosenFilter = ( key, value ) => chosenFilters[key] = value;
+
+const getFilteredCards = () => {
+  let prev = preparedCards.slice(0);
+  if (chosenFilters.type) {
+    prev = prev.filter((elem) => elem.offer.type === chosenFilters.type);
+  }
+  if (chosenFilters.rooms) {
+    prev = prev.filter((elem) => elem.offer.rooms === Number(chosenFilters.rooms));
+  }
+  if (chosenFilters.guests) {
+    prev = prev.filter((elem) => elem.offer.guests === Number(chosenFilters.guests));
+  }
+  if (chosenFilters.price==='low') {
+    prev = prev.filter((elem) => elem.offer.price < 10000);
+  }
+  if (chosenFilters.price==='high') {
+    prev = prev.filter((elem) => elem.offer.price > 50000);
+  }
+  if (chosenFilters.price==='middle') {
+    prev = prev.filter((elem) => elem.offer.price < 50000 && elem.offer.price >10000);
+  }
+  return prev;
+};
 // const mapFiltersFeatures = mapFilters.querySelector('#housing-features');
 
 /*const getInactive = (someClass, disabledClass) => {
@@ -97,86 +131,12 @@ const createMarker = (card) => {
 };
 
 getData((cards) => {
+  const ads = cards;
   cards.slice(0, 10).forEach((card) => {
     createMarker(card);
   });
+  preparedCards =  ads;
 });
-
-const createTypeFilters = (cards) => {
-  const VAL_TYPE = mapFiltersType.value;
-  const FILTERS_ARRAY = [];
-  let newi=0;
-  for(let i = 0; i < cards.length ; i++) {
-    if(cards[i].offer.type === VAL_TYPE ) {
-      FILTERS_ARRAY[newi] = cards[i];
-      newi++;
-    }
-    if(VAL_TYPE==='any') {
-      FILTERS_ARRAY[newi] = cards[i];
-      newi++;
-    }
-  }
-  return FILTERS_ARRAY;
-};
-
-const createRoomsFilters = (cards) => {
-  const VAL_ROOMS = mapFiltersRooms.value;
-  const FILTERS_ARRAY = [];
-  let newi=0;
-  for(let i = 0; i < cards.length ; i++) {
-    if(cards[i].offer.rooms === Number(VAL_ROOMS)) {
-      FILTERS_ARRAY[newi] = cards[i];
-      newi++;
-    }
-    if(VAL_ROOMS==='any') {
-      FILTERS_ARRAY[newi] = cards[i];
-      newi++;
-    }
-  }
-  return FILTERS_ARRAY;
-};
-
-const createPriceFilters = (cards) => {
-  const VAL_PRICE = mapFiltersPrice.value;
-  const FILTERS_ARRAY = [];
-  let newi=0;
-  for(let i = 0; i < cards.length ; i++) {
-    if(VAL_PRICE==='middle' && cards[i].offer.price < 50000 && cards[i].offer.price >10000) {
-      FILTERS_ARRAY[newi] = cards[i];
-      newi++;
-    }
-    if(VAL_PRICE==='low' && cards[i].offer.price < 10000 ) {
-      FILTERS_ARRAY[newi] = cards[i];
-      newi++;
-    }
-    if(VAL_PRICE==='high' && cards[i].offer.price >50000) {
-      FILTERS_ARRAY[newi] = cards[i];
-      newi++;
-    }
-    if(VAL_PRICE ==='any') {
-      FILTERS_ARRAY[newi] = cards[i];
-      newi++;
-    }
-  }
-  return FILTERS_ARRAY;
-};
-
-const createGuestsFilters = (cards) => {
-  const VAL_GUESTS = mapFiltersGuests.value;
-  const FILTERS_ARRAY = [];
-  let newi=0;
-  for(let i = 0; i < cards.length ; i++) {
-    if(cards[i].offer.guests === Number(VAL_GUESTS )) {
-      FILTERS_ARRAY[newi] = cards[i];
-      newi++;
-    }
-    if(VAL_GUESTS ==='any') {
-      FILTERS_ARRAY[newi] = cards[i];
-      newi++;
-    }
-  }
-  return FILTERS_ARRAY;
-};
 
 // const createFeaturesFilters = (cards) => {
 //   // const VAL_FEATURES = mapFiltersFeatures.querySelector('#filter-wifi').value;
@@ -203,63 +163,73 @@ const createGuestsFilters = (cards) => {
 //   });
 // });
 
-mapFiltersRooms.addEventListener('change', () => {
+mapFiltersRooms.addEventListener('change', (evt) => {
   markerGroup.clearLayers();
-  getData((cards) => {
-    const FILTERS_ARRAY = createRoomsFilters(cards);
-    FILTERS_ARRAY.slice(0, 10).forEach((card) => {
-      createMarker(card);
-    });
+  if (evt.currentTarget.value !== 'any') {
+    setChosenFilter( 'rooms', evt.currentTarget.value);
+  } else {
+    setChosenFilter('rooms', null);
+  }
+  const filteredCards = getFilteredCards();
+  filteredCards.slice(0, 10).forEach((card) => {
+    createMarker(card);
   });
 });
 
-mapFiltersType.addEventListener('change', () => {
+mapFiltersType.addEventListener('change', (evt) => {
   markerGroup.clearLayers();
-  getData((cards) => {
-    const FILTERS_ARRAY = createTypeFilters(cards);
-    FILTERS_ARRAY.slice(0, 10).forEach((card) => {
-      createMarker(card);
-    });
+  if (evt.currentTarget.value !== 'any') {
+    setChosenFilter( 'type', evt.currentTarget.value);
+  }  else {
+    setChosenFilter('type', null);
+  }
+  const filteredCards = getFilteredCards();
+  filteredCards.slice(0, 10).forEach((card) => {
+    createMarker(card);
   });
 });
 
-mapFiltersPrice.addEventListener('change', () => {
+mapFiltersPrice.addEventListener('change', (evt) => {
   markerGroup.clearLayers();
-  getData((cards) => {
-    const FILTERS_ARRAY = createPriceFilters(cards);
-    FILTERS_ARRAY.slice(0, 10).forEach((card) => {
-      createMarker(card);
-    });
+  if (evt.currentTarget.value !== 'any') {
+    setChosenFilter( 'price', evt.currentTarget.value);
+  }  else {
+    setChosenFilter('price', null);
+  }
+  const filteredCards = getFilteredCards();
+  filteredCards.slice(0, 10).forEach((card) => {
+    createMarker(card);
   });
 });
 
-mapFiltersGuests.addEventListener('change', () => {
-  markerGroup.clearLayers();
-  getData((cards) => {
-    const FILTERS_ARRAY = createGuestsFilters(cards);
-    FILTERS_ARRAY.slice(0, 10).forEach((card) => {
-      createMarker(card);
-    });
-  });
-});
-
-// mapFilters.addEventListener('click', () => {
+// mapFiltersPrice.addEventListener('change', (evt) => {
 //   markerGroup.clearLayers();
-//   getData((cards) => {
-//     const FILTERS_ARRAY =createRoomsFilters(cards);
-//     const FILTERS_ARRAY1 =createTypeFilters(cards);
-//     const FILTERS_ARRAY3 = [];
-//     let newi=0;
-//     for (let i=0; i < FILTERS_ARRAY ; i++) {
-//       for (let j=0; i < FILTERS_ARRAY1 ; j++) {
-//         if (FILTERS_ARRAY[i] === FILTERS_ARRAY1[j]) {
-//           FILTERS_ARRAY3[newi] = FILTERS_ARRAY[i];
-//           newi++;
-//         }
-//       }
-//     }
-//     FILTERS_ARRAY3.slice(0, 10).forEach((card) => {
-//       createMarker(card);
-//     });
+//   if (evt.currentTarget.value !== 'any') {
+//     setChosenFilter( 'price', evt.currentTarget.value);
+//   } else {
+//     setChosenFilter( 'price', null);
+//   }
+//   const filteredCards = getFilteredCards();
+//   filteredCards.slice(0, 10).forEach((card) => {
+//     createMarker(card);
 //   });
+//   // getData((cards) => {
+//   //   const filters = createPriceFilters(cards);
+//   //   filters.slice(0, 10).forEach((card) => {
+//   //     createMarker(card);
+//   //   });
+//   // });
 // });
+
+mapFiltersGuests.addEventListener('change', (evt) => {
+  markerGroup.clearLayers();
+  if (evt.currentTarget.value !== 'any') {
+    setChosenFilter( 'guests', evt.currentTarget.value);
+  } else {
+    setChosenFilter('guests', null);
+  }
+  const filteredCards = getFilteredCards();
+  filteredCards.slice(0, 10).forEach((card) => {
+    createMarker(card);
+  });
+});
