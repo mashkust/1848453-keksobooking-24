@@ -17,4 +17,3 @@ export const showAlert = (message) => {
     alertContainer.style.display = 'none';
   });
 };
-
