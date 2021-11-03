@@ -27,7 +27,6 @@ const getActive = (someClass, disabledClass) => {
   }
 };
 
-
 const map = L.map('map-canvas')
   .on('load', () => {
     getActive('.ad-form', 'ad-form--disabled');
@@ -93,11 +92,13 @@ export const createMarker = (card) => {
     .bindPopup(createCard(card));
 };
 
-getData((cards) => {
-  const ads = cards;
-  cards.slice(0, 10).forEach(_.debounce(
-    (card) => createMarker(card),
-    RERENDER_DELAY,
-  ));
-  preparedCards =  ads;
-});
+getData(_.debounce(
+  (cards) => {
+    const ads = cards;
+    cards.slice(0, 10).forEach((card) => {
+      createMarker(card);
+    });
+    preparedCards =  ads;
+  },
+  RERENDER_DELAY,
+));
