@@ -3,6 +3,8 @@ import {getData} from './api.js';
 
 export let preparedCards = null;
 
+const RERENDER_DELAY = 500;
+
 /*const getInactive = (someClass, disabledClass) => {
   const formSome = document.querySelector(someClass);
   const inactiveSome = formSome.classList.add(disabledClass);
@@ -93,8 +95,9 @@ export const createMarker = (card) => {
 
 getData((cards) => {
   const ads = cards;
-  cards.slice(0, 10).forEach((card) => {
-    createMarker(card);
-  });
+  cards.slice(0, 10).forEach(_.debounce(
+    (card) => createMarker(card),
+    RERENDER_DELAY,
+  ));
   preparedCards =  ads;
 });
