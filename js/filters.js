@@ -67,7 +67,7 @@ const getFilteredCards = () => {
   return prev;
 };
 
-const changeFilter = (mapFiltersParameter, parameter) => {;
+const changeFilter = (mapFiltersParameter, parameter) => {
   mapFiltersParameter.addEventListener('change', (evt) => {
     markerGroup.clearLayers();
     if (evt.currentTarget.value !== 'any') {
