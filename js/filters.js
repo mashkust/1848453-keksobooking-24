@@ -70,7 +70,8 @@ const getFilteredCards = () => {
 };
 
 export const resetFilters = () => {
-// Object.keys(chosenFilters).forEach((el) => setChosenFilter(el,null));
+  markerGroup.clearLayers();
+  // Object.keys(chosenFilters).forEach((el) => setChosenFilter(el,null));
   setChosenFilter ('type',null);
   setChosenFilter ('price',null);
   setChosenFilter ('rooms',null);
