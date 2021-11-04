@@ -1,10 +1,12 @@
 import {preparedCards, markerGroup, createMarker} from './map-form.js' ;
+import {priceFilters} from './mock.js' ;
 
 const mapFilters = document.querySelector('.map__filters');
 const mapFiltersType = mapFilters.querySelector('#housing-type');
 const mapFiltersPrice = mapFilters.querySelector('#housing-price');
 const mapFiltersRooms = mapFilters.querySelector('#housing-rooms');
 const mapFiltersGuests = mapFilters.querySelector('#housing-guests');
+
 const mapFiltersFeatures = mapFilters.querySelector('#housing-features');
 const mapFiltersWifi = mapFiltersFeatures.querySelector('#filter-wifi');
 const mapFiltersDishwasher = mapFiltersFeatures.querySelector('#filter-dishwasher');
@@ -40,13 +42,13 @@ const getFilteredCards = () => {
     prev = prev.filter((elem) => elem.offer.guests === Number(chosenFilters.guests));
   }
   if (chosenFilters.price==='low') {
-    prev = prev.filter((elem) => elem.offer.price < 10000);
+    prev = prev.filter((elem) => elem.offer.price < priceFilters.low);
   }
   if (chosenFilters.price==='high') {
-    prev = prev.filter((elem) => elem.offer.price > 50000);
+    prev = prev.filter((elem) => elem.offer.price > priceFilters.high) ;
   }
   if (chosenFilters.price==='middle') {
-    prev = prev.filter((elem) => elem.offer.price < 50000 && elem.offer.price >10000);
+    prev = prev.filter((elem) => elem.offer.price < priceFilters.high && elem.offer.price >priceFilters.low);
   }
   const setChosenFeatures = (feature, strfeature) => {
     if (feature) {
@@ -65,6 +67,38 @@ const getFilteredCards = () => {
   setChosenFeatures(chosenFilters.elevator, 'elevator');
   setChosenFeatures(chosenFilters.conditioner, 'conditioner');
   return prev;
+};
+
+export const resetFilters = () => {
+// Object.keys(chosenFilters).forEach((el) => setChosenFilter(el,null));
+  setChosenFilter ('type',null);
+  setChosenFilter ('price',null);
+  setChosenFilter ('rooms',null);
+  setChosenFilter ('guests',null);
+
+  mapFiltersType.value = 'any';
+  mapFiltersPrice.value = 'any';
+  mapFiltersRooms.value = 'any';
+  mapFiltersGuests.value = 'any';
+
+  setChosenFilter ('wifi',null);
+  setChosenFilter ('dishwasher',null);
+  setChosenFilter ('washer',null);
+  setChosenFilter ('parking',null);
+  setChosenFilter ('elevator',null);
+  setChosenFilter ('conditioner',null);
+
+  mapFiltersElevator.checked = false;
+  mapFiltersParking.checked = false;
+  mapFiltersWasher.checked = false;
+  mapFiltersConditioner.checked = false;
+  mapFiltersDishwasher.checked = false;
+  mapFiltersWifi.checked = false;
+
+  const filteredCards = getFilteredCards();
+  filteredCards.slice(0, 10).forEach((card) => {
+    createMarker(card);
+  });
 };
 
 const changeFilter = (mapFiltersParameter, parameter) => {
@@ -97,6 +131,7 @@ mapFiltersWifi.addEventListener('change', () => {
 
 mapFiltersDishwasher.addEventListener('change', () => {
   markerGroup.clearLayers();
+  //mapFiltersWifi.checked = false;
   if (chosenFilters.dishwasher) {
     setChosenFilter('dishwasher', null);
   } else  {

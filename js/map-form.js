@@ -5,6 +5,10 @@ export let preparedCards = null;
 
 const RERENDER_DELAY = 500;
 
+export const startCoordinate =  {
+  lat: 35.68950,
+  lng: 139.69200,
+};
 /*const getInactive = (someClass, disabledClass) => {
   const formSome = document.querySelector(someClass);
   const inactiveSome = formSome.classList.add(disabledClass);
@@ -50,11 +54,8 @@ const mainPinIcon = L.icon({
   iconAnchor: [26, 52],
 });
 
-const mainPinMarker = L.marker(
-  {
-    lat: 35.6895,
-    lng: 139.692,
-  },
+export const mainPinMarker = L.marker(
+  startCoordinate,
   {
     draggable: true,
     icon: mainPinIcon,
