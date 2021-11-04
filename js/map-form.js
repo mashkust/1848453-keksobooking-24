@@ -1,13 +1,14 @@
 import {createCard} from'./marking.js';
 import {getData} from './api.js';
 
-// const mapFilters = document.querySelector('.map__filters');
-// const mapFiltersType = mapFilters.querySelector('#housing-type');
-// const mapFiltersPrice = mapFilters.querySelector('#housing-price');
-// const mapFiltersRooms = mapFilters.querySelector('#housing-rooms');
-// const mapFiltersGuests = mapFilters.querySelector('#housing-guests');
-// const mapFiltersFeatures = mapFilters.querySelector('#housing-features');
+export let preparedCards = null;
 
+const RERENDER_DELAY = 500;
+
+export const startCoordinate =  {
+  lat: 35.68950,
+  lng: 139.69200,
+};
 /*const getInactive = (someClass, disabledClass) => {
   const formSome = document.querySelector(someClass);
   const inactiveSome = formSome.classList.add(disabledClass);
@@ -29,7 +30,6 @@ const getActive = (someClass, disabledClass) => {
     return activeSome;
   }
 };
-
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -54,11 +54,8 @@ const mainPinIcon = L.icon({
   iconAnchor: [26, 52],
 });
 
-const mainPinMarker = L.marker(
-  {
-    lat: 35.6895,
-    lng: 139.692,
-  },
+export const mainPinMarker = L.marker(
+  startCoordinate,
   {
     draggable: true,
     icon: mainPinIcon,
@@ -70,9 +67,9 @@ mainPinMarker.on('moveend', (evt) => {
   document.querySelector('#address').value = `${evt.target.getLatLng().lat.toFixed(5)},${evt.target.getLatLng().lng.toFixed(5)}`;
 });
 
-const markerGroup = L.layerGroup().addTo(map);
+export const markerGroup = L.layerGroup().addTo(map);
 
-const createMarker = (card) => {
+export const createMarker = (card) => {
   const {lat, lng} = card.location;
 
   const icon = L.icon({
@@ -96,34 +93,13 @@ const createMarker = (card) => {
     .bindPopup(createCard(card));
 };
 
-getData((cards) => {
-  cards.slice(0, 10).forEach((card) => {
-    createMarker(card);
-  });
-});
-
-// const createAdsFilters = () => {
-//   const VAL_TYPE = mapFiltersType.value;
-//   // const VAL_PRICE = mapFiltersPrice.value;
-//   // const VAL_ROOMS = mapFiltersRooms.value;
-//   // const VAL_GUESTS = mapFiltersGuests.value;
-//   // const VAL_FEATURES = mapFiltersFeatures.value;
-//   const FILTERS_ARRAY = [];
-//   let newi=0;
-//   for(let i = 0; i < ads.length ; i++) {
-//     if(ads[i].offer.type === VAL_TYPE ) {
-//       FILTERS_ARRAY[newi] = ads[i];
-//       newi++;
-//     }
-//   }
-//   return FILTERS_ARRAY;
-// };
-
-
-// mapFilters.addEventListener('click', () => {
-//   markerGroup.clearLayers();
-//   const FILTERS_ARRAY = createAdsFilters();
-//   FILTERS_ARRAY.forEach((point) => {
-//     createMarker(point);
-//   }
-// });
+getData(_.debounce(
+  (cards) => {
+    const ads = cards;
+    cards.slice(0, 10).forEach((card) => {
+      createMarker(card);
+    });
+    preparedCards =  ads;
+  },
+  RERENDER_DELAY,
+));

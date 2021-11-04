@@ -47,7 +47,6 @@ const makePopupFeatures = (popupElement, features) => {
   });
 };
 
-
 export const createCard = (offerObject) => {
   const userCard  = mapTemplate.querySelector('.popup').cloneNode(true);
   const makeNone = (userClass,property) => {

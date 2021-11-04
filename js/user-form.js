@@ -88,9 +88,4 @@ const setUserFormSubmit = () => {
   });
 };
 
-// function openUserModal() {
-//   userModalElement.classList.remove('hidden');
-// }
-
 setUserFormSubmit ();
-

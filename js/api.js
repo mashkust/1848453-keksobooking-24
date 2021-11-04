@@ -1,12 +1,19 @@
+import {resetFilters} from './filters.js' ;
+import { mainPinMarker , startCoordinate} from './map-form.js';
+import { showAlertError} from './message.js';
+
 const getData = async (onSuccess) => {
   fetch('https://24.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
     .then((cards) => {
       onSuccess(cards);
+    })
+    .catch(() => {
+      showAlertError('Не удалось получить похожие объявления');
     });
 };
 
-const sendData = (onSuccess, onFail, body) => {
+const sendData = async (onSuccess, onFail, body) => {
   fetch(
     'https://24.javascript.pages.academy/keksobooking',
     {
@@ -16,7 +23,10 @@ const sendData = (onSuccess, onFail, body) => {
   )
     .then((response) => {
       if (response.ok) {
+        onSuccess();
         document.querySelector('.ad-form__reset').click();
+        resetFilters();
+        mainPinMarker.setLatLng(startCoordinate);
         onSuccess();
       } else {
         onFail('Не удалось отправить форму. Попробуйте ещё раз');
