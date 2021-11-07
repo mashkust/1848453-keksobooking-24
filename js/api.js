@@ -1,6 +1,7 @@
 import {resetFilters} from './filters.js' ;
 import { mainPinMarker , startCoordinate} from './map-form.js';
 import { showAlertError} from './message.js';
+import {resetPhotos} from './avatar.js';
 
 const getData = async (onSuccess) => {
   fetch('https://24.javascript.pages.academy/keksobooking/data')
@@ -26,6 +27,7 @@ const sendData = async (onSuccess, onFail, body) => {
         onSuccess();
         document.querySelector('.ad-form__reset').click();
         resetFilters();
+        resetPhotos();
         mainPinMarker.setLatLng(startCoordinate);
         onSuccess();
       } else {
