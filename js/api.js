@@ -1,6 +1,6 @@
 import {resetFilters} from './filters.js' ;
-import { mainPinMarker , startCoordinate} from './map-form.js';
-import { showAlertError} from './message.js';
+import {mainPinMarker, startCoordinate} from './map-form.js';
+import {showAlertError} from './message.js';
 import {resetPhotos} from './avatar.js';
 
 const getData = async (onSuccess) => {

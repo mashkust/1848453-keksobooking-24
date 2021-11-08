@@ -12,15 +12,18 @@ export const resetPhotos = () => {
   preview.childNodes[1].style.zIndex = 0;
 };
 
+const addStyle = (templatePhoto, file) =>{
+  templatePhoto.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+  templatePhoto.style.backgroundRepeat = 'no-repeat';
+  templatePhoto.style.backgroundSize = '100%';
+};
 
 fileChooser.addEventListener('change', () => {
   const file = fileChooser.files[0];
   const fileName = file.name.toLowerCase();
   const matches = FORMATS.some((it) => fileName.endsWith(it));
   if (matches) {
-    preview.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
-    preview.style.backgroundRepeat = 'no-repeat';
-    preview.style.backgroundSize = '100%';
+    addStyle(preview, file);
     preview.childNodes[1].style.zIndex = -1;
   }
 });
@@ -30,9 +33,7 @@ photoChooser.addEventListener('change', () => {
   const fileName = file.name.toLowerCase();
   const matches = FORMATS.some((it) => fileName.endsWith(it));
   if (matches) {
-    photoPreview.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
-    photoPreview.style.backgroundRepeat = 'no-repeat';
-    photoPreview.style.backgroundSize = '100%';
+    addStyle(photoPreview, file);
   }
 });
 
