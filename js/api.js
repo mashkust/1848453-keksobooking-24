@@ -24,7 +24,6 @@ const sendData = async (onSuccess, onFail, body) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess();
         document.querySelector('.ad-form__reset').click();
         resetFilters();
         resetPhotos();

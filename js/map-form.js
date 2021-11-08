@@ -7,7 +7,7 @@ export const controlObj = {
 
 const RERENDER_DELAY = 500;
 const START_X = 35.68950;
-const START_Y = 35.68950;
+const START_Y = 139.69200;
 
 export const startCoordinate =  {
   lat: START_X,
@@ -32,8 +32,8 @@ const map = L.map('map-canvas')
     getActive('.map__filters', 'map__filters--disabled');
   })
   .setView({
-    lat: 35.6895,
-    lng: 139.692,
+    lat: START_X,
+    lng: START_Y,
   }, 10);
 
 L.tileLayer(
