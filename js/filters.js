@@ -120,7 +120,6 @@ mapFiltersWifi.addEventListener('change', () => {
 
 mapFiltersDishwasher.addEventListener('change', () => {
   markerGroup.clearLayers();
-  //mapFiltersWifi.checked = false;
   if (chosenFilters.dishwasher) {
     setChosenFilter('dishwasher', null);
   } else  {
