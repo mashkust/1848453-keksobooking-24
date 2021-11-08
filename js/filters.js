@@ -1,4 +1,4 @@
-import {preparedCards, markerGroup, createMarker} from './map-form.js' ;
+import {controlObj, markerGroup, createMarker} from './map-form.js' ;
 import {priceFilters} from './mock.js' ;
 
 const mapFilters = document.querySelector('.map__filters');
@@ -31,7 +31,7 @@ const chosenFilters = {
 const setChosenFilter = ( key, value ) => chosenFilters[key] = value;
 
 const getFilteredCards = () => {
-  let prev = preparedCards.slice(0);
+  let prev = controlObj.preparedCards.slice(0);
   if (chosenFilters.type) {
     prev = prev.filter((elem) => elem.offer.type === chosenFilters.type);
   }
@@ -71,24 +71,12 @@ const getFilteredCards = () => {
 
 export const resetFilters = () => {
   markerGroup.clearLayers();
-  // Object.keys(chosenFilters).forEach((el) => setChosenFilter(el,null));
-  setChosenFilter ('type',null);
-  setChosenFilter ('price',null);
-  setChosenFilter ('rooms',null);
-  setChosenFilter ('guests',null);
 
+  Object.keys(chosenFilters).forEach((el) => setChosenFilter(el,null));
   mapFiltersType.value = 'any';
   mapFiltersPrice.value = 'any';
   mapFiltersRooms.value = 'any';
   mapFiltersGuests.value = 'any';
-
-  setChosenFilter ('wifi',null);
-  setChosenFilter ('dishwasher',null);
-  setChosenFilter ('washer',null);
-  setChosenFilter ('parking',null);
-  setChosenFilter ('elevator',null);
-  setChosenFilter ('conditioner',null);
-
   mapFiltersElevator.checked = false;
   mapFiltersParking.checked = false;
   mapFiltersWasher.checked = false;

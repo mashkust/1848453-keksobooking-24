@@ -1,23 +1,18 @@
 import {createCard} from'./marking.js';
 import {getData} from './api.js';
 
-export let preparedCards = null;
+export const controlObj = {
+  preparedCards: null,
+};
 
 const RERENDER_DELAY = 500;
+const START_X = 35.68950;
+const START_Y = 35.68950;
 
 export const startCoordinate =  {
-  lat: 35.68950,
-  lng: 139.69200,
+  lat: START_X,
+  lng: START_Y,
 };
-/*const getInactive = (someClass, disabledClass) => {
-  const formSome = document.querySelector(someClass);
-  const inactiveSome = formSome.classList.add(disabledClass);
-  const fieldsetSome = formSome.getElementsByTagName('fieldset');
-  for( let i = 0; i < fieldsetSome.length; i++ ){
-    fieldsetSome[i].disabled=true;
-  }
-  return inactiveSome;
-};*/
 
 const getActive = (someClass, disabledClass) => {
   if (document.querySelector(someClass).classList.contains(disabledClass)){
@@ -99,7 +94,7 @@ getData(_.debounce(
     cards.slice(0, 10).forEach((card) => {
       createMarker(card);
     });
-    preparedCards =  ads;
+    controlObj.preparedCards = ads;
   },
   RERENDER_DELAY,
 ));

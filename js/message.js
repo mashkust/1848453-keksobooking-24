@@ -6,13 +6,13 @@ export const showAlert = (message) => {
   const alertContainer = document.createElement('section');
   const messageServer  = message.cloneNode(true);
   document.body.appendChild(alertContainer).appendChild(messageServer);
-  const onPopupEscKeydown = (evt) => {
+  const setPopupEscKeydown = (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
     }
   };
   document.addEventListener('keydown',() => {
-    onPopupEscKeydown;
+    setPopupEscKeydown;
     alertContainer.style.display = 'none';
   });
   document.addEventListener('click', () => {
@@ -22,11 +22,11 @@ export const showAlert = (message) => {
 
 export const showAlertError = (message) => {
   const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
+  alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
-  alertContainer.style.left = 0;
-  alertContainer.style.top = 0;
-  alertContainer.style.right = 0;
+  alertContainer.style.left = '0';
+  alertContainer.style.top = '0';
+  alertContainer.style.right = '0';
   alertContainer.style.padding = '10px 3px';
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';

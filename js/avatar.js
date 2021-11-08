@@ -1,4 +1,4 @@
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const FORMATS = ['gif', 'jpg', 'jpeg', 'png'];
 
 const fileChooser = document.querySelector('.ad-form-header__input');
 const photoChooser = document.querySelector('.ad-form__input');
@@ -16,7 +16,7 @@ export const resetPhotos = () => {
 fileChooser.addEventListener('change', () => {
   const file = fileChooser.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const matches = FORMATS.some((it) => fileName.endsWith(it));
   if (matches) {
     preview.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
     preview.style.backgroundRepeat = 'no-repeat';
@@ -28,7 +28,7 @@ fileChooser.addEventListener('change', () => {
 photoChooser.addEventListener('change', () => {
   const file = photoChooser.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const matches = FORMATS.some((it) => fileName.endsWith(it));
   if (matches) {
     photoPreview.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
     photoPreview.style.backgroundRepeat = 'no-repeat';
